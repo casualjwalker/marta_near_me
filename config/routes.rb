@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'trains' => 'marta#index'
+  post 'trains' => 'marta#index'
 
   root 'locations#new'
+
 
   resources :locations
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,20 @@
+<p>That digital board that's supposed to tell you how soon a train is coming </p>
+<p>Pick your station.. we'll see if a train will be coming soon.</p>
+
+<div>
+	<%= form_tag(trains_path) do %>
+		<%= select_tag :station, options_for_select(@stations), {include_blank: "Choose a station"} %>
+		<%= submit_tag "Check Trains!" %>
+	<% end %>	
+</div>
+
+<% if @arriving_trains != nil %>
+	<h3>These Trains Are Nearly There!</h3>
+
+	<% @arriving_trains.each do |train| %>
+		<ul>
+			<li>A <%= train["LINE"] %> Line Train, bound for <%= train["DESTINATION"] %> (<%= train["DIRECTION"] %>)</li>
+			<li> Will be arriving in <%= ((Time.now - Time.parse(train["NEXT_ARR"])).abs / 60). round(2) %> mins</li>
+		</ul>
+	<% end %>
+<% end %>
